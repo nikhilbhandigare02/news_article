@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../Routes/RouteName.dart';
@@ -24,13 +23,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white   ,
-      appBar: const NewsAppBar(
+      backgroundColor: Colors.white,
+      appBar: NewsAppBar(
         title: "News Category",
         showBack: false,
-
+        moreIcon: Icons.bookmark_border_rounded,
+        onMorePressed: () {
+          Navigator.pushNamed(context, Routename.BookmarkScreen);
+        },
       ),
-
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
         child: GridView.builder(

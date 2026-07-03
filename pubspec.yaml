@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   url_launcher: ^6.3.1
   intl: ^0.19.0
+  sqflite: 
 
 dev_dependencies:
   flutter_test:

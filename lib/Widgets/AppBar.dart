@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-class NewsAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class NewsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBack;
-
   final bool showMore;
-
+  final IconData? moreIcon;
   final VoidCallback? onSearchPressed;
   final VoidCallback? onMorePressed;
 
@@ -14,8 +12,8 @@ class NewsAppBar extends StatelessWidget
     super.key,
     required this.title,
     this.showBack = false,
-
     this.showMore = true,
+    this.moreIcon,
     this.onSearchPressed,
     this.onMorePressed,
   });
@@ -29,14 +27,12 @@ class NewsAppBar extends StatelessWidget
       shadowColor: Colors.black.withOpacity(0.4),
       surfaceTintColor: Colors.white,
       iconTheme: const IconThemeData(color: Colors.black),
-
       leading: showBack
           ? IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new),
-        onPressed: () => Navigator.pop(context),
-      )
+              icon: const Icon(Icons.arrow_back_ios_new),
+              onPressed: () => Navigator.pop(context),
+            )
           : null,
-
       title: Text(
         title,
         style: const TextStyle(
@@ -44,12 +40,10 @@ class NewsAppBar extends StatelessWidget
           fontWeight: FontWeight.w600,
         ),
       ),
-
       actions: [
-
         if (showMore)
           IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black),
+            icon: Icon(moreIcon ?? Icons.more_vert, color: Colors.black),
             onPressed: onMorePressed,
           ),
       ],
