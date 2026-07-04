@@ -3,9 +3,9 @@
 ## Setup & Run
 
 ### Prerequisites
-- Flutter SDK
-- Dart SDK
-- Android Studio or VS Code
+- Flutter SDK - version 3.44.4
+- Dart SDK - version 3.12.2
+- Android Studio or VS Code 
 - Android Emulator or Physical Device
 
 ### Installation
