@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:news_articles/Widgets/AppBar.dart';
 import 'package:news_articles/model/NewsArticleModel.dart';
+import '../../Routes/RouteName.dart';
 import '../../Utils/enum.dart';
 import '../../bloc/BookmarkBloc/bookmark_bloc.dart';
 
@@ -57,129 +58,135 @@ class _ArticledetailsscreenState extends State<Articledetailsscreen> {
                   ),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      widget.article.urlToImage != null
-                          ? Image.network(
-                              widget.article.urlToImage!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  width: 110,
-                                  height: 110,
-                                  color: const Color(0xFFF2F4F8),
-                                  child: const Icon(
-                                    Icons.broken_image_outlined,
-                                    color: Colors.grey,
-                                    size: 30,
-                                  ),
-                                );
-                              },
-                            )
-                          : Container(
-                              color: Colors.grey.shade300,
-                              child:
-                                  const Icon(Icons.image, size: 60, color: Colors.grey),
+                  background: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        widget.article.urlToImage != null
+                            ? Image.network(
+                                widget.article.urlToImage!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    width: 110,
+                                    height: 110,
+                                    color: const Color(0xFFF2F4F8),
+                                    child: const Icon(
+                                      Icons.broken_image_outlined,
+                                      color: Colors.grey,
+                                      size: 30,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Container(
+                                color: Colors.grey.shade300,
+                                child:
+                                    const Icon(Icons.image, size: 60, color: Colors.grey),
+                              ),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.black.withOpacity(0.25),
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.75),
+                              ],
+                              stops: const [0.0, 0.5, 1.0],
                             ),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.black.withOpacity(0.25),
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.75),
-                            ],
-                            stops: const [0.0, 0.5, 1.0],
                           ),
                         ),
-                      ),
-
-                      Positioned(
-                        left: 20,
-                        right: 20,
-                        bottom: 20,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                              decoration: BoxDecoration(
-                                color: primaryBlue,
-                                borderRadius: BorderRadius.circular(30),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryBlue.withOpacity(0.4),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(Icons.bolt_rounded,
-                                      size: 14, color: Colors.white),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    widget.article.source?.name ?? "News",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 12.5,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BlocBuilder<BookmarkBloc, BookmarkState>(
-                              builder: (context, state) {
-                                return InkWell(
-                                  onTap: () {
-                                    if (state.isCurrentArticleBookmarked) {
-                                      context.read<BookmarkBloc>().add(
-                                          RemoveBookmarkEvent(url: widget.article.url));
-                                    } else {
-                                      context.read<BookmarkBloc>().add(
-                                          AddBookmarkEvent(article: widget.article));
-                                    }
-                                  },
+                    
+                        Positioned(
+                          left: 20,
+                          right: 20,
+                          bottom: 20,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                                decoration: BoxDecoration(
+                                  color: primaryBlue,
                                   borderRadius: BorderRadius.circular(30),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.45),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Colors.white.withOpacity(0.2),
-                                        width: 1,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: primaryBlue.withOpacity(0.4),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.bolt_rounded,
+                                        size: 14, color: Colors.white),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      widget.article.source?.name ?? "News",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 12.5,
                                       ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.3),
-                                          blurRadius: 10,
-                                          offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              BlocBuilder<BookmarkBloc, BookmarkState>(
+                                builder: (context, state) {
+                                  return InkWell(
+                                    onTap: () {
+                                      if (state.isCurrentArticleBookmarked) {
+                                        context.read<BookmarkBloc>().add(
+                                            RemoveBookmarkEvent(url: widget.article.url));
+                                      } else {
+                                        context.read<BookmarkBloc>().add(
+                                            AddBookmarkEvent(article: widget.article));
+                                      }
+                                    },
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.45),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white.withOpacity(0.2),
+                                          width: 1,
                                         ),
-                                      ],
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.3),
+                                            blurRadius: 10,
+                                            offset: const Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Icon(
+                                        state.isCurrentArticleBookmarked
+                                            ? Icons.bookmark
+                                            : Icons.bookmark_border,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      state.isCurrentArticleBookmarked
-                                          ? Icons.bookmark
-                                          : Icons.bookmark_border,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -347,6 +354,29 @@ class _ArticledetailsscreenState extends State<Articledetailsscreen> {
                 ),
               ),
             ],
+          ),
+          floatingActionButton: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, Routename.Home);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Colors.orange, width: 0.08),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    )
+                  ]
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child:  Icon(Icons.home, size: 30 ,color: Colors.blue.shade700,),
+              ),
+            ),
           ),
         ),
     );

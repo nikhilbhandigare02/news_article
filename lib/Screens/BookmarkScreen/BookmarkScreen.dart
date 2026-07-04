@@ -246,6 +246,29 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
             );
           },
         ),
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, Routename.Home);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: Colors.orange, width: 0.08),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  )
+                ]
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child:  Icon(Icons.home, size: 30 ,color: Colors.blue.shade700,),
+            ),
+          ),
+        ),
       ),
     );
   }

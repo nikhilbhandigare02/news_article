@@ -11,6 +11,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
   final List<CategoryModel> categories = [
     CategoryModel(name: "Entertainment", icon: Icons.movie, color: Colors.pink, ),
     CategoryModel(name: "Business", icon: Icons.business, color: Colors.blue, ),

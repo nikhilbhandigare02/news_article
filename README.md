@@ -1,17 +1,32 @@
-# news_articles
+# Flutter Application
 
-A new Flutter project.
+## Setup & Run
 
-## Getting Started
+### Prerequisites
+- Flutter SDK
+- Dart SDK
+- Android Studio or VS Code
+- Android Emulator or Physical Device
 
-This project is a starting point for a Flutter application.
+### Installation
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### Run the App
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter run
+```
+
+## Architecture
+- **Architecture:** MVVM
+- **State Management:** BLoC
+
+## Dependencies
+All required dependencies are listed in `pubspec.yaml`. Install them using:
+
+```bash
+flutter pub get
+```
