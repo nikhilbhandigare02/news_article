@@ -21,7 +21,6 @@ flutter run
 ```
 
 ## Architecture
-- **Architecture:** MVVM
 - **State Management:** BLoC
 
 ## Dependencies
